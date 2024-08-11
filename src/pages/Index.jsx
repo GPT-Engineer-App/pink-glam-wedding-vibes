@@ -57,14 +57,14 @@ const Index = () => {
 
   const handleTouch = useCallback((e) => {
     const touch = e.touches[0];
-    setTouchHearts((prevHearts) => [
-      ...prevHearts,
-      {
-        id: Date.now(),
-        x: touch.clientX,
-        y: touch.clientY,
-      },
-    ]);
+    const newHearts = Array.from({ length: 10 }, (_, index) => ({
+      id: Date.now() + index,
+      x: touch.clientX + (Math.random() - 0.5) * 50,
+      y: touch.clientY,
+      size: Math.random() * 20 + 10,
+      angle: Math.random() * 360,
+    }));
+    setTouchHearts((prevHearts) => [...prevHearts, ...newHearts]);
   }, []);
 
   useEffect(() => {
@@ -127,8 +127,12 @@ const Index = () => {
           <CardContent>
             <p className="mb-4">We kindly request our guests to dress in black tie attire. Let's make this night as glamorous as our love!</p>
             <div className="grid grid-cols-2 gap-4">
-              <img src="https://example.com/black-tie-men.jpg" alt="Men's Black Tie" className="mx-auto object-cover w-full h-48 rounded-lg" />
-              <img src="https://example.com/black-tie-women.jpg" alt="Women's Black Tie" className="mx-auto object-cover w-full h-48 rounded-lg" />
+              <div className="bg-gray-200 w-full h-48 rounded-lg flex items-center justify-center">
+                <span className="text-gray-500">Men's Black Tie</span>
+              </div>
+              <div className="bg-gray-200 w-full h-48 rounded-lg flex items-center justify-center">
+                <span className="text-gray-500">Women's Black Tie</span>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -158,9 +162,15 @@ const Index = () => {
         <motion.div
           key={heart.id}
           className="fixed text-pink-500 pointer-events-none"
-          initial={{ opacity: 1, scale: 0, x: heart.x, y: heart.y }}
-          animate={{ opacity: 0, scale: 2, y: heart.y - 100 }}
-          transition={{ duration: 1 }}
+          initial={{ opacity: 1, scale: 0, x: heart.x, y: heart.y, rotate: heart.angle }}
+          animate={{ 
+            opacity: 0, 
+            scale: 1, 
+            y: heart.y - 200, 
+            x: heart.x + (Math.random() - 0.5) * 100 
+          }}
+          transition={{ duration: 2, ease: "easeOut" }}
+          style={{ fontSize: heart.size }}
           onAnimationComplete={() => setTouchHearts((prevHearts) => prevHearts.filter((h) => h.id !== heart.id))}
         >
           ❤️
