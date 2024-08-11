@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import { Palmtree, Sun, Wine } from 'lucide-react';
 
 const AnimatedText = ({ children }) => {
   const words = children.split(' ');
@@ -104,24 +105,24 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-pink-100 p-4 font-sans relative overflow-hidden" onTouchStart={handleTouch}>
+    <div className="min-h-screen bg-[#f8f4f1] p-4 font-serif relative overflow-hidden" onTouchStart={handleTouch}>
       {showConfetti && <Confetti />}
       <HeartRain />
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
         <motion.h1
-          className="text-5xl font-bold text-center mb-6 text-pink-600"
-          animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          className="text-6xl font-bold text-center mb-6 text-[#8B4513]"
+          animate={{ scale: [1, 1.05, 1], rotate: [0, 2, -2, 0] }}
+          transition={{ duration: 3, repeat: Infinity }}
         >
-          <AnimatedText>Ana & Kristian's Wedding</AnimatedText>
+          <AnimatedText>Ana & Kristian</AnimatedText>
         </motion.h1>
         <FloatingElement>
           <motion.h2
-            className="text-3xl font-semibold text-center mb-4 text-pink-500"
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
+            className="text-3xl font-semibold text-center mb-4 text-[#D2691E]"
+            animate={{ y: [0, -5, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
           >
-            October 26, 2024
+            26 de Octubre, 2024 • Barcelona, España
           </motion.h2>
         </FloatingElement>
         <motion.div
@@ -130,8 +131,8 @@ const Index = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <Button onClick={toggleConfetti} className="bg-pink-500 hover:bg-pink-600 text-white">
-            Celebrate with Us!
+          <Button onClick={toggleConfetti} className="bg-[#D2691E] hover:bg-[#8B4513] text-white">
+            ¡Celebra con nosotros!
           </Button>
         </motion.div>
 
@@ -143,34 +144,34 @@ const Index = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <AnimatedCard title="Our Love Story" delay={0}>
-            <p>Ana and Kristian's love story is one for the ages. From the moment they met in 2018, their hearts knew they had found their soulmate. Their love has only grown stronger with each passing day, filled with adventures, laughter, and unwavering support for each other. They can't imagine life without one another and are thrilled to begin this new chapter together.</p>
+          <AnimatedCard title="Nuestra Historia de Amor" delay={0}>
+            <p>El amor de Ana y Kristian es una historia para recordar. Desde que se conocieron en 2018, sus corazones supieron que habían encontrado a su alma gemela. Su amor ha crecido cada día, lleno de aventuras, risas y apoyo incondicional. No pueden imaginar la vida el uno sin el otro y están emocionados de comenzar este nuevo capítulo juntos.</p>
           </AnimatedCard>
 
-          <AnimatedCard title="Wedding Program" delay={0.2}>
-            <ul className="list-disc list-inside">
-              <li>2:00 PM - Ceremony of Love</li>
-              <li>3:00 PM - Celebration Cocktails</li>
-              <li>5:00 PM - Romantic Dinner</li>
-              <li>7:00 PM - Dancing the Night Away</li>
+          <AnimatedCard title="Programa de la Boda" delay={0.2}>
+            <ul className="list-none mt-2">
+              <li className="flex items-center mb-2"><Sun className="mr-2 text-[#D2691E]" size={16} /> 14:00 - Ceremonia de Amor</li>
+              <li className="flex items-center mb-2"><Wine className="mr-2 text-[#D2691E]" size={16} /> 15:00 - Cóctel de Celebración</li>
+              <li className="flex items-center mb-2"><Palmtree className="mr-2 text-[#D2691E]" size={16} /> 17:00 - Cena Romántica</li>
+              <li className="flex items-center"><Music className="mr-2 text-[#D2691E]" size={16} /> 19:00 - Baile hasta el Amanecer</li>
             </ul>
           </AnimatedCard>
         </motion.div>
 
         <Separator className="my-6" />
 
-        <Card className="bg-pink-50">
+        <Card className="bg-[#f8f4f1]">
           <CardHeader>
-            <CardTitle className="text-pink-600">Black Tie Dress Code</CardTitle>
+            <CardTitle className="text-[#8B4513]">Código de Vestimenta: Elegante</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="mb-4">We kindly request our guests to dress in black tie attire. Let's make this night as glamorous as our love!</p>
+            <p className="mb-4">Solicitamos amablemente a nuestros invitados que vistan de manera elegante. ¡Hagamos que esta noche sea tan glamurosa como nuestro amor!</p>
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gray-200 w-full h-48 rounded-lg flex items-center justify-center">
-                <span className="text-gray-500">Men's Black Tie</span>
+              <div className="bg-white w-full h-48 rounded-lg flex items-center justify-center shadow-md">
+                <span className="text-[#8B4513]">Traje Oscuro</span>
               </div>
-              <div className="bg-gray-200 w-full h-48 rounded-lg flex items-center justify-center">
-                <span className="text-gray-500">Women's Black Tie</span>
+              <div className="bg-white w-full h-48 rounded-lg flex items-center justify-center shadow-md">
+                <span className="text-[#8B4513]">Vestido de Cóctel</span>
               </div>
             </div>
           </CardContent>
@@ -178,43 +179,43 @@ const Index = () => {
 
         <Separator className="my-6" />
 
-        <Card className="bg-pink-50">
+        <Card className="bg-[#f8f4f1]">
           <CardHeader>
-            <CardTitle className="text-pink-600">Registry</CardTitle>
+            <CardTitle className="text-[#8B4513]">Lista de Regalos</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>Your presence is the greatest gift, but if you'd like to contribute to our new life together:</p>
+            <p>Tu presencia es el mejor regalo, pero si deseas contribuir a nuestra nueva vida juntos:</p>
             <ul className="list-disc list-inside mt-2">
-              <li>Bed Bath & Beyond</li>
+              <li>El Corte Inglés</li>
               <li>Amazon</li>
-              <li>Crate & Barrel</li>
+              <li>Zara Home</li>
             </ul>
-            <p className="mt-2">We've also set up a honeymoon fund for our dream trip to Bali!</p>
+            <p className="mt-2">¡También hemos creado un fondo para nuestra luna de miel en las Islas Baleares!</p>
           </CardContent>
         </Card>
 
         <Separator className="my-6" />
 
-        <Card className="bg-pink-50">
+        <Card className="bg-[#f8f4f1]">
           <CardHeader>
-            <CardTitle className="text-pink-600">Ana & Kristian's First Dance</CardTitle>
+            <CardTitle className="text-[#8B4513]">El Primer Baile</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>Picture Ana and Kristian in their first dance as a married couple:</p>
-            <p>Ana, with her long dark hair and warm smile, wearing a beautiful white wedding gown, her eyes sparkling with joy.</p>
-            <p>Kristian, with his wavy blonde hair and gentle expression, dressed in a sharp black tuxedo, looking lovingly at his bride.</p>
-            <p>They twirl gracefully across the dance floor, lost in each other's eyes, their love radiating to all their guests.</p>
+            <p>Imagina a Ana y Kristian en su primer baile como marido y mujer:</p>
+            <p>Ana, con su largo cabello oscuro y cálida sonrisa, vistiendo un hermoso vestido de novia blanco, sus ojos brillando de alegría.</p>
+            <p>Kristian, con su cabello rubio ondulado y expresión gentil, vestido con un elegante esmoquin negro, mirando amorosamente a su novia.</p>
+            <p>Giran con gracia por la pista de baile, perdidos en los ojos del otro, su amor irradiando a todos los invitados.</p>
           </CardContent>
         </Card>
 
-        <footer className="mt-8 text-center text-lg text-pink-600">
-          <AnimatedText>💖 We can't wait to share our love with you! 💖</AnimatedText>
+        <footer className="mt-8 text-center text-lg text-[#8B4513]">
+          <AnimatedText>💃 ¡No podemos esperar para compartir nuestro amor con ustedes! 🕺</AnimatedText>
         </footer>
       </div>
       {touchHearts.map((heart) => (
         <motion.div
           key={heart.id}
-          className="fixed text-pink-500 pointer-events-none"
+          className="fixed text-[#D2691E] pointer-events-none"
           initial={{ opacity: 1, scale: 0, x: heart.x, y: heart.y, rotate: heart.angle }}
           animate={{ 
             opacity: 0, 
@@ -240,9 +241,9 @@ const AnimatedCard = ({ title, children, delay = 0 }) => {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay }}
     >
-      <Card className="bg-pink-50 h-full">
+      <Card className="bg-[#f8f4f1] h-full shadow-md">
         <CardHeader>
-          <CardTitle className="text-pink-600">{title}</CardTitle>
+          <CardTitle className="text-[#8B4513]">{title}</CardTitle>
         </CardHeader>
         <CardContent>{children}</CardContent>
       </Card>
