@@ -154,6 +154,20 @@ const Index = () => {
           </CardContent>
         </Card>
 
+        <Separator className="my-6" />
+
+        <Card className="bg-pink-50">
+          <CardHeader>
+            <CardTitle className="text-pink-600">Ana & Kristian's First Dance</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>Picture Ana and Kristian in their first dance as a married couple:</p>
+            <p>Ana, with her long dark hair and warm smile, wearing a beautiful white wedding gown, her eyes sparkling with joy.</p>
+            <p>Kristian, with his wavy blonde hair and gentle expression, dressed in a sharp black tuxedo, looking lovingly at his bride.</p>
+            <p>They twirl gracefully across the dance floor, lost in each other's eyes, their love radiating to all their guests.</p>
+          </CardContent>
+        </Card>
+
         <footer className="mt-8 text-center text-lg text-pink-600">
           <AnimatedText>💖 We can't wait to share our love with you! 💖</AnimatedText>
         </footer>
