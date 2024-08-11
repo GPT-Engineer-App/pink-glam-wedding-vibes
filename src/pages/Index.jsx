@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Palmtree, Sun, Wine, Music, Heart } from 'lucide-react';
+import LanguageSwitcher from './LanguageSwitcher';
+import LoveMinigame from './LoveMinigame';
 
 const AnimatedText = ({ children }) => {
   const words = typeof children === 'string' ? children.split(' ') : [children];
@@ -84,6 +86,7 @@ const HeartRain = () => {
 const Index = () => {
   const [touchHearts, setTouchHearts] = useState([]);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [language, setLanguage] = useState('en');
 
   const handleTouch = useCallback((e) => {
     const touch = e.touches[0];
@@ -108,6 +111,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-[#FFF0F5] p-4 font-serif relative overflow-hidden" onTouchStart={handleTouch}>
+      <LanguageSwitcher language={language} setLanguage={setLanguage} />
       {showConfetti && <Confetti />}
       <HeartRain />
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
@@ -208,14 +212,41 @@ const Index = () => {
             <CardTitle className="text-[#FF1493]">El Primer Baile / The First Dance</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>Imagina a Ana y Kristian en su primer baile como marido y mujer:</p>
-            <p>Imagine Ana and Kristian in their first dance as husband and wife:</p>
-            <p>Ana, con su largo cabello oscuro y cálida sonrisa, vistiendo un hermoso vestido de novia blanco, sus ojos brillando de alegría.</p>
-            <p>Ana, with her long dark hair and warm smile, wearing a beautiful white wedding dress, her eyes shining with joy.</p>
-            <p>Kristian, con su cabello rubio ondulado y expresión gentil, vestido con un elegante esmoquin negro, mirando amorosamente a su novia.</p>
-            <p>Kristian, with his wavy blonde hair and gentle expression, dressed in an elegant black tuxedo, looking lovingly at his bride.</p>
-            <p>Giran con gracia por la pista de baile, perdidos en los ojos del otro, su amor irradiando a todos los invitados.</p>
-            <p>They gracefully twirl across the dance floor, lost in each other's eyes, their love radiating to all the guests.</p>
+            <AnimatedText>
+              <p>Imagina a Ana y Kristian en su primer baile como marido y mujer:</p>
+            </AnimatedText>
+            <AnimatedText>
+              <p>Imagine Ana and Kristian in their first dance as husband and wife:</p>
+            </AnimatedText>
+            <AnimatedText>
+              <p>Ana, con su largo cabello oscuro y cálida sonrisa, vistiendo un hermoso vestido de novia blanco, sus ojos brillando de alegría.</p>
+            </AnimatedText>
+            <AnimatedText>
+              <p>Ana, with her long dark hair and warm smile, wearing a beautiful white wedding dress, her eyes shining with joy.</p>
+            </AnimatedText>
+            <AnimatedText>
+              <p>Kristian, con su cabello rubio ondulado y expresión gentil, vestido con un elegante esmoquin negro, mirando amorosamente a su novia.</p>
+            </AnimatedText>
+            <AnimatedText>
+              <p>Kristian, with his wavy blonde hair and gentle expression, dressed in an elegant black tuxedo, looking lovingly at his bride.</p>
+            </AnimatedText>
+            <AnimatedText>
+              <p>Giran con gracia por la pista de baile, perdidos en los ojos del otro, su amor irradiando a todos los invitados.</p>
+            </AnimatedText>
+            <AnimatedText>
+              <p>They gracefully twirl across the dance floor, lost in each other's eyes, their love radiating to all the guests.</p>
+            </AnimatedText>
+          </CardContent>
+        </Card>
+
+        <Separator className="my-6" />
+
+        <Card className="bg-[#FFF0F5]">
+          <CardHeader>
+            <CardTitle className="text-[#FF1493]">Love Minigame</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <LoveMinigame />
           </CardContent>
         </Card>
 
