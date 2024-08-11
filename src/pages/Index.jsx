@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Palmtree, Sun, Wine, Music, Heart } from 'lucide-react';
 
 const AnimatedText = ({ children }) => {
-  const words = children.split(' ');
+  const words = typeof children === 'string' ? children.split(' ') : [children];
   return (
     <motion.div>
       {words.map((word, index) => (
@@ -221,8 +221,10 @@ const Index = () => {
 
         <footer className="mt-8 text-center text-lg text-[#FF1493]">
           <AnimatedText>
-            <span className="block">💃 ¡No podemos esperar para compartir nuestro amor con ustedes! 🕺</span>
-            <span className="block">💃 We can't wait to share our love with you! 🕺</span>
+            💃 ¡No podemos esperar para compartir nuestro amor con ustedes! 🕺
+          </AnimatedText>
+          <AnimatedText>
+            💃 We can't wait to share our love with you! 🕺
           </AnimatedText>
         </footer>
       </div>
