@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { Palmtree, Sun, Wine } from 'lucide-react';
+import { Palmtree, Sun, Wine, Music } from 'lucide-react';
 
 const AnimatedText = ({ children }) => {
   const words = children.split(' ');
