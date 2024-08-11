@@ -1,17 +1,43 @@
 import { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 
 const AnimatedText = ({ children }) => {
+  const words = children.split(' ');
   return (
-    <motion.span
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, yoyo: Infinity }}
+    <motion.div>
+      {words.map((word, index) => (
+        <motion.span
+          key={index}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+          className="inline-block mr-1"
+        >
+          {word}
+        </motion.span>
+      ))}
+    </motion.div>
+  );
+};
+
+const FloatingElement = ({ children, delay = 0 }) => {
+  return (
+    <motion.div
+      initial={{ y: 0 }}
+      animate={{ y: [-10, 10] }}
+      transition={{
+        duration: 2,
+        repeat: Infinity,
+        repeatType: "reverse",
+        ease: "easeInOut",
+        delay: delay,
+      }}
     >
       {children}
-    </motion.span>
+    </motion.div>
   );
 };
 
@@ -54,6 +80,7 @@ const HeartRain = () => {
 
 const Index = () => {
   const [touchHearts, setTouchHearts] = useState([]);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const handleTouch = useCallback((e) => {
     const touch = e.touches[0];
@@ -72,8 +99,13 @@ const Index = () => {
     return () => document.removeEventListener('touchstart', handleTouch);
   }, [handleTouch]);
 
+  const toggleConfetti = () => {
+    setShowConfetti((prev) => !prev);
+  };
+
   return (
-    <div className="min-h-screen bg-pink-100 p-4 font-sans" onTouchStart={handleTouch}>
+    <div className="min-h-screen bg-pink-100 p-4 font-sans relative overflow-hidden" onTouchStart={handleTouch}>
+      {showConfetti && <Confetti />}
       <HeartRain />
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
         <motion.h1
@@ -83,40 +115,47 @@ const Index = () => {
         >
           <AnimatedText>Ana & Kristian's Wedding</AnimatedText>
         </motion.h1>
-        <motion.h2
-          className="text-3xl font-semibold text-center mb-4 text-pink-500"
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
+        <FloatingElement>
+          <motion.h2
+            className="text-3xl font-semibold text-center mb-4 text-pink-500"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            October 26, 2024
+          </motion.h2>
+        </FloatingElement>
+        <motion.div
+          className="text-center mb-6"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
         >
-          October 26, 2024
-        </motion.h2>
+          <Button onClick={toggleConfetti} className="bg-pink-500 hover:bg-pink-600 text-white">
+            Celebrate with Us!
+          </Button>
+        </motion.div>
 
         <Separator className="my-6" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="bg-pink-50">
-            <CardHeader>
-              <CardTitle className="text-pink-600">Our Love Story</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Ana and Kristian's love story is one for the ages. From the moment they met in 2018, their hearts knew they had found their soulmate. Their love has only grown stronger with each passing day, filled with adventures, laughter, and unwavering support for each other. They can't imagine life without one another and are thrilled to begin this new chapter together.</p>
-            </CardContent>
-          </Card>
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <AnimatedCard title="Our Love Story" delay={0}>
+            <p>Ana and Kristian's love story is one for the ages. From the moment they met in 2018, their hearts knew they had found their soulmate. Their love has only grown stronger with each passing day, filled with adventures, laughter, and unwavering support for each other. They can't imagine life without one another and are thrilled to begin this new chapter together.</p>
+          </AnimatedCard>
 
-          <Card className="bg-pink-50">
-            <CardHeader>
-              <CardTitle className="text-pink-600">Wedding Program</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="list-disc list-inside">
-                <li>2:00 PM - Ceremony of Love</li>
-                <li>3:00 PM - Celebration Cocktails</li>
-                <li>5:00 PM - Romantic Dinner</li>
-                <li>7:00 PM - Dancing the Night Away</li>
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
+          <AnimatedCard title="Wedding Program" delay={0.2}>
+            <ul className="list-disc list-inside">
+              <li>2:00 PM - Ceremony of Love</li>
+              <li>3:00 PM - Celebration Cocktails</li>
+              <li>5:00 PM - Romantic Dinner</li>
+              <li>7:00 PM - Dancing the Night Away</li>
+            </ul>
+          </AnimatedCard>
+        </motion.div>
 
         <Separator className="my-6" />
 
@@ -189,6 +228,52 @@ const Index = () => {
         >
           ❤️
         </motion.div>
+      ))}
+    </div>
+  );
+};
+
+const AnimatedCard = ({ title, children, delay = 0 }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, delay }}
+    >
+      <Card className="bg-pink-50 h-full">
+        <CardHeader>
+          <CardTitle className="text-pink-600">{title}</CardTitle>
+        </CardHeader>
+        <CardContent>{children}</CardContent>
+      </Card>
+    </motion.div>
+  );
+};
+
+const Confetti = () => {
+  return (
+    <div className="fixed inset-0 pointer-events-none">
+      {Array.from({ length: 100 }).map((_, index) => (
+        <motion.div
+          key={index}
+          className="absolute w-2 h-2 bg-pink-500 rounded-full"
+          initial={{
+            x: Math.random() * window.innerWidth,
+            y: -10,
+            opacity: 1,
+          }}
+          animate={{
+            y: window.innerHeight + 10,
+            opacity: 0,
+          }}
+          transition={{
+            duration: Math.random() * 2 + 1,
+            repeat: Infinity,
+            repeatType: "loop",
+            ease: "linear",
+            delay: Math.random() * 5,
+          }}
+        />
       ))}
     </div>
   );
